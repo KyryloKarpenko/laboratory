@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.departments}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.departments}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.department.name}"></th>
+            <th th:text="#{label.department.head}"></th>
+            <th th:text="#{label.department.specialization}"></th>
+        </tr>
+        <tr th:each="department : ${departments}">
+            <td th:text="${department.name}"></td>
+            <td th:switch="${department.head}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${department.head.position + ' ' + department.head.firstName + ' ' + department.head.lastName}"></div>
+            </td>
+            <td th:switch="${department.specialization}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${department.specialization.code + ' ' + department.specialization.name}"></div>
+            </td>
+            <td><a th:href="@{/department/delete/{id}(id=${department.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/department/update/{id}(id=${department.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

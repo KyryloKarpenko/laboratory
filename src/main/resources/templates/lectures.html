@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.lectures}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.lectures}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.lecture.week}"></th>
+            <th th:text="#{label.lecture.day}"></th>
+            <th th:text="#{label.lecture.type}"></th>
+            <th th:text="#{label.lecture.number}"></th>
+            <th th:text="#{label.lecture.room}"></th>
+            <th th:text="#{label.lecture.group}"></th>
+            <th th:text="#{label.lecture.teacher}"></th>
+            <th th:text="#{label.lecture.subject}"></th>
+        </tr>
+        <tr th:each="lecture : ${lectures}">
+            <td th:text="${lecture.week}"></td>
+            <td th:text="${lecture.day.name()}"></td>
+            <td th:text="${lecture.type.name()}"></td>
+            <td th:text="${lecture.number}"></td>
+            <td th:text="${lecture.room}"></td>
+            <td th:switch="${lecture.group}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${lecture.group.name}"></div>
+            </td>
+            <td th:switch="${lecture.teacher}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${lecture.teacher.position.name + ' ' + lecture.teacher.firstName + ' ' + lecture.teacher.lastName}"></div>
+            </td>
+            <td th:switch="${lecture.subject}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${lecture.subject.name}"></div>
+            </td>
+            <td><a th:href="@{/lecture/delete/{id}(id=${lecture.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/lecture/update/{id}(id=${lecture.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

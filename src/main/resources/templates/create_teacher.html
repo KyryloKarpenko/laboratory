@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.teacher.create}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.teacher.create}"></h1>
+    <form th:action="@{/teacher/create}" th:object="${teacherDTO}" th:method="post">
+        <div>
+            <input th:field="*{id}" th:value="${teacherDTO.id}" hidden>
+        </div>
+        <div>
+            <label th:text="#{label.teacher.firstName}"></label>
+            <input th:field="*{firstName}">
+        </div>
+        <div>
+            <label th:text="#{label.teacher.lastName}"></label>
+            <input th:field="*{lastName}">
+        </div>
+        <div th:if="${positions.size() != 0}">
+            <label th:text="#{label.teacher.position}"></label>
+            <select th:field="*{position}">
+                <option th:each="position: ${positions}" th:value="${position.name()}" th:text="${position.name()}">
+                </option>
+            </select>
+        </div>
+        <div th:if="${departments.size() != 0}">
+            <label th:text="#{label.teacher.department}"></label>
+            <select th:field="*{department}">
+                <option th:value="null" th:text="#{label.text.na}"></option>
+                <option th:each="department: ${departments}" th:value="${department.id}" th:text="${department.name}">
+                </option>
+            </select>
+        </div>
+        <button th:type="submit" th:text="#{label.button.create}"></button>
+    </form>
+</body>
+</html>

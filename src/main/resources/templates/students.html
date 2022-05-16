@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.students}"></title>
+</head>
+<body>
+<h1 th:text="#{label.students}"></h1>
+<table th:border="1">
+    <tr>
+        <th th:text="#{label.student.firstName}"></th>
+        <th th:text="#{label.student.lastName}"></th>
+        <th th:text="#{label.student.group}"></th>
+    </tr>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.firstName}"></td>
+        <td th:text="${student.lastName}"></td>
+        <td th:switch="${student.group}">
+            <div th:case="null" th:text="#{label.text.na}"></div>
+            <div th:case="*" th:text="${student.group.name}"></div>
+        </td>
+        <td><a th:href="@{/student/delete/{id}(id=${student.id})}" th:text="#{label.button.delete}"></a></td>
+        <td><a th:href="@{/student/update/{id}(id=${student.id})}" th:text="#{label.button.update}"></a></td>
+    </tr>
+</table>
+</body>
+</html>

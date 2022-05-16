@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.groups}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.groups}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.group.name}"></th>
+            <th th:text="#{label.group.year}"></th>
+            <th th:text="#{label.group.department}"></th>
+        </tr>
+        <tr th:each="group : ${groups}">
+            <td th:text="${group.name}"></td>
+            <td th:text="${group.year}"></td>
+            <td th:switch="${group.department}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${group.department.name}"></div>
+            </td>
+            <td><a th:href="@{/group/delete/{id}(id=${group.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/group/update/{id}(id=${group.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

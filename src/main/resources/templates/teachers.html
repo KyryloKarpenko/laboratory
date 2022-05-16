@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.teachers}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.teachers}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.teacher.firstName}"></th>
+            <th th:text="#{label.teacher.lastName}"></th>
+            <th th:text="#{label.teacher.position}"></th>
+            <th th:text="#{label.teacher.department}"></th>
+        </tr>
+        <tr th:each="teacher : ${teachers}">
+            <td th:text="${teacher.firstName}"></td>
+            <td th:text="${teacher.lastName}"></td>
+            <td th:text="${teacher.position.name()}"></td>
+            <td th:switch="${teacher.department}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${teacher.department.name}"></div>
+            </td>
+            <td><a th:href="@{/teacher/delete/{id}(id=${teacher.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/teacher/update/{id}(id=${teacher.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

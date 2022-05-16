@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.subject.create}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.subject.create}"></h1>
+    <form th:action="@{/subject/create}" th:object="${subjectDTO}" th:method="post">
+        <div>
+            <input th:field="*{id}" th:value="${subjectDTO.id}" hidden>
+        </div>
+        <div>
+            <label th:text="#{label.subject.name}"></label>
+            <input th:field="*{name}">
+        </div>
+        <button th:type="submit" th:text="#{label.button.create}"></button>
+    </form>
+</body>
+</html>

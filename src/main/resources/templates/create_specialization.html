@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.specialization.create}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.specialization.create}"></h1>
+    <form th:action="@{/specialization/create}" th:object="${specializationDTO}" th:method="post">
+        <div>
+            <input th:field="*{id}" th:value="${specializationDTO.id}" hidden>
+        </div>
+        <div>
+            <label th:text="#{label.specialization.name}"></label>
+            <input th:field="*{name}">
+        </div>
+        <div>
+            <label th:text="#{label.specialization.code}"></label>
+            <input th:field="*{code}">
+        </div>
+        <div th:if="${faculties.size() != 0}">
+            <label th:text="#{label.specialization.faculty}"></label>
+            <select th:field="*{faculty}">
+                <option th:each="faculty: ${faculties}" th:value="${faculty.id}" th:text="${faculty.name}"></option>
+            </select>
+        </div>
+        <button th:type="submit" th:text="#{label.button.create}"></button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.specializations}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.specializations}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.specialization.name}"></th>
+            <th th:text="#{label.specialization.code}"></th>
+            <th th:text="#{label.specialization.faculty}"></th>
+        </tr>
+        <tr th:each="specialization : ${specializations}">
+            <td th:text="${specialization.name}"></td>
+            <td th:text="${specialization.code}"></td>
+            <td th:switch="${specialization.faculty}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${specialization.faculty.name}"></div>
+            </td>
+            <td><a th:href="@{/specialization/delete/{id}(id=${specialization.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/specialization/update/{id}(id=${specialization.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

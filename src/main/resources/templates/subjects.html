@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.subjects}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.subjects}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.subject.name}"></th>
+        </tr>
+        <tr th:each="subject : ${subjects}">
+            <td th:text="${subject.name}"></td>
+            <td><a th:href="@{/subject/delete/{id}(id=${subject.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/subject/update/{id}(id=${subject.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>

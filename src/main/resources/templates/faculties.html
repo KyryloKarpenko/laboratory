@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{label.faculties}"></title>
+</head>
+<body>
+    <h1 th:text="#{label.faculties}"></h1>
+    <table th:border="1">
+        <tr>
+            <th th:text="#{label.faculty.name}"></th>
+            <th th:text="#{label.faculty.dean}"></th>
+        </tr>
+        <tr th:each="faculty : ${faculties}">
+            <td th:text="${faculty.name}"></td>
+            <td th:switch="${faculty.dean}">
+                <div th:case="null" th:text="#{label.text.na}"></div>
+                <div th:case="*" th:text="${faculty.dean.position + ' ' + faculty.dean.firstName + ' ' + faculty.dean.lastName}"></div>
+            </td>
+            <td><a th:href="@{/faculty/delete/{id}(id=${faculty.id})}" th:text="#{label.button.delete}"></a></td>
+            <td><a th:href="@{/faculty/update/{id}(id=${faculty.id})}" th:text="#{label.button.update}"></a></td>
+        </tr>
+    </table>
+</body>
+</html>
